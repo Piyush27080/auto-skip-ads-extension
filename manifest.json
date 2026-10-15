@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Skip Ads for YouTube",
+  "version": "2.0.0",
+  "description": "Automatically skips YouTube ads so your music and videos keep playing.",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Auto Skip Ads",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*", "*://music.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Auto Skip Ads</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon48.png" alt="" width="36" height="36">
+    <div class="title">
+      <h1>Auto Skip Ads</h1>
+      <p id="status">Active</p>
+    </div>
+    <label class="switch" title="Turn on/off">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <section class="stats">
+    <div class="card">
+      <span class="num" id="count">0</span>
+      <span class="label">Ads skipped</span>
+    </div>
+    <div class="card">
+      <span class="num" id="time">0s</span>
+      <span class="label">Time saved</span>
+    </div>
+  </section>
+
+  <section class="options">
+    <div class="row">
+      <div>
+        <strong>Mute ads</strong>
+        <small>Silence the ad until it ends</small>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="muteAds">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="row">
+      <div>
+        <strong>Fast-forward ads</strong>
+        <small>For ads with no Skip button</small>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="fastForward">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </section>
+
+  <button id="reset">Reset stats</button>
+  <footer>Works on youtube.com and music.youtube.com</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
