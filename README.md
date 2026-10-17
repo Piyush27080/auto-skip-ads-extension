@@ -8,7 +8,7 @@
 
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/version-2.1.0-red)
+![Version](https://img.shields.io/badge/version-2.0.0-red)
 ![Platform](https://img.shields.io/badge/browser-Chrome%20%7C%20Edge%20%7C%20Brave-lightgrey)
 
 ## Screenshots
@@ -34,14 +34,15 @@
 
 This extension is not on the Chrome Web Store. Install it in developer mode:
 
-1. **Download** this repository (green **Code** button → **Download ZIP**) and unzip it, or clone it:
+1. **Download** this repository: green **Code** button → **Download ZIP**. Or clone it:
    ```bash
    git clone https://github.com/Piyush27080/auto-skip-ads-extension.git
    ```
-2. Open `chrome://extensions` (Edge: `edge://extensions`, Brave: `brave://extensions`).
-3. Turn on **Developer mode** (top right).
-4. Click **Load unpacked** and select the folder that contains `manifest.json`.
-5. Open YouTube. Pin the extension from the puzzle icon to open its popup.
+2. **Unzip it first.** Right-click the ZIP file → **Extract All**. Chrome cannot load an extension from inside a ZIP file.
+3. **Open the extracted folder until you can see `manifest.json`, `content.js` and `popup.html`.** GitHub ZIP files often extract to a folder inside a folder (`auto-skip-ads-extension-main\auto-skip-ads-extension-main`). You need the inner one, the folder that directly contains `manifest.json`.
+4. Open `chrome://extensions` (Edge: `edge://extensions`, Brave: `brave://extensions`) and turn on **Developer mode** (top right).
+5. Click **Load unpacked** and select that folder (the one with `manifest.json` inside).
+6. Open YouTube. Pin the extension from the puzzle icon to open its popup.
 
 > Chrome shows a warning for extensions loaded this way. That is normal for any extension that does not come from the Web Store. Keep Developer mode on or Chrome will disable it.
 
@@ -61,11 +62,11 @@ Click the extension icon to:
 ## How it works
 
 1. `content.js` is injected into YouTube pages.
-2. A `MutationObserver` on the player, video events, and a fast 100 ms backup timer detect the `ad-showing` class the moment it appears.
-3. During an ad it runs three steps at once, as fast as possible:
-   - **mutes** the video instantly (if enabled),
-   - **fast-forwards** at 16x speed instantly and jumps to the end of the ad as soon as its length is known (if enabled),
-   - **clicks the Skip button** the moment it is visible.
+2. A `MutationObserver` and a 300 ms timer check whether the player has the `ad-showing` class.
+3. During an ad it:
+   - clicks the Skip button if it is visible,
+   - mutes the video (if enabled),
+   - fast-forwards the ad when there is no Skip button (if enabled).
 4. When the ad ends, it restores sound and playback speed and updates the counters.
 5. The popup and the content script share settings through `chrome.storage.local`, so changes apply instantly.
 
@@ -94,8 +95,9 @@ auto-skip-ads-extension/
 
 ## Troubleshooting
 
+- **"Manifest file is missing or unreadable":** you selected the wrong folder. Open the folder you selected. If you see another folder with the same name inside it, open that one and select it instead. The right folder is the one that directly contains `manifest.json`. Also make sure you unzipped the ZIP file before loading it.
 - **Nothing happens:** reload the extension on `chrome://extensions`, then refresh the YouTube tab (Ctrl + R).
-- Press **F12 → Console**. You should see `[Auto Skip] v2.1 running`, and `Ad detected` when an ad plays.
+- Press **F12 → Console**. You should see `[Auto Skip] v2.0 running`, and `Ad detected` when an ad plays.
 - **Skip button not clicked:** YouTube changes its page often. Right-click the Skip button → **Inspect**, copy its class name and add it to `SKIP_SELECTORS` in `content.js`.
 - **Two ad skippers installed:** disable one, because they can conflict.
 

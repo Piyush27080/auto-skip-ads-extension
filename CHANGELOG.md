@@ -3,12 +3,6 @@
 All notable changes to this project are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [2.1.0] - 2026-10-15
-### Changed
-- Faster ad skipping: ads are now muted and sped up to 16x instantly, even before their length is known
-- Ads are detected the moment they start (player observer + video events + 100 ms backup timer instead of a 300 ms timer)
-- The Skip button is clicked as soon as it appears, in the same pass as mute and fast-forward
-
 ## [2.0.0] - 2026-10-15
 ### Added
 - Popup with ON/OFF switch, mute and fast-forward settings
